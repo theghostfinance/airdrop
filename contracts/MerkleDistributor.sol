@@ -32,6 +32,7 @@ contract MerkleDistributor is IMerkleDistributor {
     }
 
     function claim(uint256 index, address account, uint256 amount, bytes32[] calldata merkleProof) external override {
+        require(account == msg.sender, 'MerkleDistributor: You are not the given account')
         require(!isClaimed(index), 'MerkleDistributor: Drop already claimed.');
 
         // Verify the merkle proof.
